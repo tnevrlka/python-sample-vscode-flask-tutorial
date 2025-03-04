@@ -22,4 +22,4 @@ steps:
       git config --global --add safe.directory $(pwd)
       cd /work
       cat rhtap/env.sh
-    name: Pre-init
+    name: pre_init
