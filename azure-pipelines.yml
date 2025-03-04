@@ -15,14 +15,33 @@ container: quay.io/redhat-appstudio/rhtap-task-runner:latest
 
 steps:
   - bash: |
-      buildah --version
-      syft --version
-      cosign version
-      ec version
-      git config --global --add safe.directory $(pwd)
-      cd /work
-      ls
-      cd rhtap
-      ls
-      cat env.sh
-    name: pre_init
+      echo "• init"
+      bash /work/rhtap/init.sh
+  - name: Init
+  - bash: |
+      echo "• buildah-rhtap"
+      bash /work/rhtap/buildah-rhtap.sh
+      echo "• cosign-sign-attest"
+      bash /work/rhtap/cosign-sign-attest.sh
+    name: Build
+  - bash: |
+      echo "• acs-deploy-check"
+      bash /work/rhtap/acs-deploy-check.sh
+      echo "• acs-image-check"
+      bash /work/rhtap/acs-image-check.sh
+      echo "• acs-image-scan"
+      bash /work/rhtap/acs-image-scan.sh
+    name: Scan
+  - run: |
+      echo "• update-deployment"
+      bash /work/rhtap/update-deployment.sh
+    name: Deploy
+  - bash: |
+      echo "• show-sbom-rhdh"
+      bash /work/rhtap/show-sbom-rhdh.sh
+      echo "• summary"
+      bash /work/rhtap/summary.sh
+    name: Summary
+  - bash: |
+      echo "Done"
+    name: Done
