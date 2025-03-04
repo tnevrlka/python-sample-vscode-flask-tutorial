@@ -21,5 +21,6 @@ steps:
       ec version
       git config --global --add safe.directory $(pwd)
       cd /work
-      cat rhtap/env.sh
+      ls
+      cat /work/rhtap/env.sh
     name: pre_init
