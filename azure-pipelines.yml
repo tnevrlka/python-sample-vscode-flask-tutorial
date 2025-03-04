@@ -14,4 +14,12 @@ pool:
 container: quay.io/redhat-appstudio/rhtap-task-runner:latest
 
 steps:
-- script: ls
+  - name: Pre-init
+    bash: |
+      buildah --version
+      syft --version
+      cosign version
+      ec version
+      git config --global --add safe.directory $(pwd)
+      cd /work
+      cat rhtap/env.sh
