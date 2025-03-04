@@ -17,7 +17,7 @@ steps:
   - bash: |
       echo "• init"
       bash /work/rhtap/init.sh
-  - name: Init
+    name: Init
   - bash: |
       echo "• buildah-rhtap"
       bash /work/rhtap/buildah-rhtap.sh
@@ -32,7 +32,7 @@ steps:
       echo "• acs-image-scan"
       bash /work/rhtap/acs-image-scan.sh
     name: Scan
-  - run: |
+  - bash: |
       echo "• update-deployment"
       bash /work/rhtap/update-deployment.sh
     name: Deploy
