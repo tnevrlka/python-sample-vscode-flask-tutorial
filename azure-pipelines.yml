@@ -6,7 +6,10 @@
 trigger:
 - main
 
-pool: resourcehub
+pool: 
+  name: resourcehub
+  demands:
+  - Agent.Name -equals tnevrlka-agent
 
 container: quay.io/redhat-appstudio/rhtap-task-runner:latest
 
